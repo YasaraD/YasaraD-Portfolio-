@@ -14,8 +14,7 @@ import {
   MessageCircle,
   Terminal,
   Cpu,
-  Layers,
-  Activity
+  Layers
 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import { contactConfig } from '../data/contactConfig';
@@ -198,7 +197,7 @@ export default function Hero() {
           </div>
 
           {/* Right Column: Architectural Tactile Portrait Card */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+          <div className="lg:col-span-5 flex justify-center lg:justify-end lg:self-start lg:-mt-6 xl:-mt-10">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -222,20 +221,8 @@ export default function Hero() {
                     className="w-full h-full object-cover object-top filter contrast-[1.03] group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   
-                  {/* Subtle Vignette Gradient */}
+                  {/* Subtle Vignette Gradient at bottom for text legibility */}
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/30 to-transparent pointer-events-none" />
-
-                  {/* Top Live ML Badge */}
-                  <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-950/80 border border-white/10 backdrop-blur-md text-[10px] font-mono text-zinc-300">
-                      <Activity className="w-3 h-3 text-sky-400 animate-pulse" />
-                      <span>ACCURACY: 89.5%</span>
-                    </div>
-
-                    <div className="px-2.5 py-1 rounded-full bg-zinc-950/80 border border-white/10 backdrop-blur-md text-[10px] font-mono text-sky-400">
-                      ViT + CLIP
-                    </div>
-                  </div>
 
                   {/* Bottom Tactile Profile Deck */}
                   <div className="absolute bottom-3.5 left-3.5 right-3.5 p-3.5 rounded-2xl bg-zinc-950/85 border border-white/10 backdrop-blur-md">
@@ -251,17 +238,6 @@ export default function Hero() {
                     </div>
                   </div>
                 </div>
-
-                {/* Floating Top Pill */}
-                <motion.div
-                  initial={{ y: -8, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.45, duration: 0.4 }}
-                  className="absolute -top-3.5 -right-3 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-700 text-xs font-semibold text-white shadow-xl flex items-center gap-1.5"
-                >
-                  <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
-                  <span>First Class Honours</span>
-                </motion.div>
               </div>
             </motion.div>
           </div>
