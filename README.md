@@ -51,10 +51,28 @@ npm run preview
 
 ---
 
-## 📸 Profile Photo
-Your photo is placed at:
+## 📸 Profile Photo & Resume / CV
+
+- **Profile Photo**: Placed at `public/yasara.jpg`. To update your photo, simply replace that file.
+- **Resume / CV**: Place your PDF file at `public/Yasara_Dissanayake_CV.pdf`. In `src/data/contactConfig.js`, set `contactConfig.resume.available = true` to enable direct 1-click downloading!
+
+---
+
+## 📱 Centralized Contact & Social Links Configuration
+
+All contact information and social URLs are now centralized in a single file:
 ```
-public/yasara.jpg
+src/data/contactConfig.js
 ```
-To update or change your photo in the future, simply replace that file!
+
+You can update any of the following in **one place** without touching component code:
+- **Email**: `email.address` & `email.mailto`
+- **Phone**: `phone.display`, `phone.tel`, & `phone.whatsappUrl`
+- **GitHub**: `socials.github.url`
+- **LinkedIn**: `socials.linkedin.url`
+- **WhatsApp**: `socials.whatsapp.url`
+- **Resume/CV**: `resume.url` & `resume.available`
+- **Kaggle / Hugging Face**: `socials.kaggle.url` & `socials.huggingface.url`
+
+Any update made here automatically updates the **Navbar**, **Hero Section**, **Contact Section**, **Footer**, and **Project Case Study Modals**!
 

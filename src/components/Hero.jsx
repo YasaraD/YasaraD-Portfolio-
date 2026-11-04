@@ -1,13 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail, MapPin, Sparkles, Download, CheckCircle2 } from 'lucide-react';
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Sparkles,
+  Download,
+  CheckCircle2,
+  Phone,
+  MessageCircle,
+  FileText
+} from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
+import { contactConfig } from '../data/contactConfig';
 
 export default function Hero() {
+  const handleCvClick = (e) => {
+    if (!contactConfig.resume.available) {
+      e.preventDefault();
+      // Friendly fallback to request CV directly
+      const requestUrl = `mailto:${contactConfig.email.address}?subject=${encodeURIComponent(contactConfig.resume.requestSubject)}&body=${encodeURIComponent(`Hi ${contactConfig.shortName},\n\nI was reviewing your portfolio and would like to request an updated copy of your CV / Resume.\n\nThank you!`)}`;
+      window.location.href = requestUrl;
+    }
+  };
+
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
-      {/* Background Subtle Ambient Glow - Simple & Minimalist */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-sky-500/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+      {/* Background Ambient Glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[350px] bg-sky-500/10 blur-[130px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-10 left-10 w-72 h-72 bg-indigo-500/5 blur-[100px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -19,13 +43,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-300 mb-6"
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs font-medium text-zinc-300 mb-6 backdrop-blur-md shadow-sm"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span>Fresh Computer Science Graduate • Open to Opportunities</span>
+              <span>{contactConfig.status}</span>
             </motion.div>
 
             {/* Main Title */}
@@ -35,7 +59,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] mb-6"
             >
-              Hi, I'm <span className="text-white">Yasara</span>{' '}
+              Hi, I'm <span className="text-white">{contactConfig.shortName}</span>{' '}
               <span className="text-zinc-500 block sm:inline">Dissanayake</span>
             </motion.h1>
 
@@ -56,11 +80,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-3 w-full sm:w-auto"
+              className="flex flex-wrap items-center gap-3 w-full sm:w-auto mb-6"
             >
               <a
                 href="#projects"
-                className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-zinc-950 font-semibold text-sm hover:bg-sky-400 hover:text-zinc-950 transition-all duration-200 shadow-md shadow-white/5"
+                className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-zinc-950 font-semibold text-sm hover:bg-sky-400 hover:text-zinc-950 transition-all duration-200 shadow-lg shadow-white/5"
               >
                 <span>View Projects</span>
                 <ArrowDown className="w-4 h-4" />
@@ -74,13 +98,78 @@ export default function Hero() {
                 <ArrowUpRight className="w-4 h-4 text-zinc-400" />
               </a>
 
-              {/* Direct Email link quick pill */}
+              {/* CV Button */}
               <a
-                href={`mailto:${personalInfo.email}`}
-                className="p-3 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 transition-all"
-                title="Send direct email"
+                href={contactConfig.resume.url}
+                onClick={handleCvClick}
+                target={contactConfig.resume.available ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-zinc-900/90 border border-sky-500/30 text-sky-400 hover:bg-sky-500/10 hover:border-sky-400 transition-all duration-200 text-sm font-medium"
+                title={contactConfig.resume.available ? "Download CV PDF" : "Request CV via email"}
+              >
+                <Download className="w-4 h-4" />
+                <span>{contactConfig.resume.available ? "Download CV" : "Request CV"}</span>
+              </a>
+            </motion.div>
+
+            {/* Fast Social Reach Bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="flex items-center gap-2"
+            >
+              <span className="text-xs font-mono text-zinc-500 mr-1 hidden sm:inline">Connect:</span>
+              
+              <a
+                href={contactConfig.socials.github.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Profile"
+                className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 hover:bg-zinc-800/80 transition-all"
+                title={`GitHub: ${contactConfig.socials.github.username}`}
+              >
+                <Github className="w-4 h-4" />
+              </a>
+
+              <a
+                href={contactConfig.socials.linkedin.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn Profile"
+                className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-sky-400 hover:border-sky-500/30 hover:bg-zinc-800/80 transition-all"
+                title="LinkedIn Profile"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
+
+              <a
+                href={contactConfig.socials.whatsapp.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp Direct Chat"
+                className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-emerald-400 hover:border-emerald-500/30 hover:bg-zinc-800/80 transition-all"
+                title="WhatsApp Direct Message"
+              >
+                <MessageCircle className="w-4 h-4" />
+              </a>
+
+              <a
+                href={contactConfig.email.mailto}
+                aria-label="Send Direct Email"
+                className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 hover:bg-zinc-800/80 transition-all"
+                title={`Email: ${contactConfig.email.address}`}
               >
                 <Mail className="w-4 h-4" />
+              </a>
+
+              <a
+                href={contactConfig.phone.tel}
+                aria-label="Call Direct"
+                className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 hover:bg-zinc-800/80 transition-all sm:flex hidden"
+                title={`Call: ${contactConfig.phone.display}`}
+              >
+                <Phone className="w-4 h-4" />
               </a>
             </motion.div>
 
@@ -93,7 +182,7 @@ export default function Hero() {
             >
               <div className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-zinc-400" />
-                <span>Galle & Colombo, Sri Lanka</span>
+                <span>{contactConfig.location.display}</span>
               </div>
               <div className="h-3 w-px bg-zinc-800" />
               <div className="flex items-center gap-1.5">
@@ -112,14 +201,14 @@ export default function Hero() {
               className="relative w-full max-w-sm"
             >
               {/* Outer Card Frame with Subtle Glow */}
-              <div className="relative rounded-3xl p-2 bg-gradient-to-b from-zinc-800/80 via-zinc-900 to-zinc-950 border border-zinc-800 shadow-2xl">
+              <div className="relative rounded-3xl p-2 bg-gradient-to-b from-zinc-800/80 via-zinc-900 to-zinc-950 border border-zinc-800 shadow-2xl group">
                 
                 {/* Photo Container */}
                 <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-zinc-900">
                   <img
                     src={personalInfo.photo}
-                    alt={personalInfo.name}
-                    className="w-full h-full object-cover object-top filter contrast-[1.02] hover:scale-105 transition-transform duration-500 ease-out"
+                    alt={contactConfig.name}
+                    className="w-full h-full object-cover object-top filter contrast-[1.02] group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
                   {/* Subtle vignette gradient at bottom of photo for text legibility */}
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent pointer-events-none" />
@@ -128,7 +217,7 @@ export default function Hero() {
                   <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-zinc-950/80 border border-white/10 backdrop-blur-md">
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="text-xs font-semibold text-white">Yasara Dissanayake</div>
+                        <div className="text-xs font-semibold text-white">{contactConfig.shortName} Dissanayake</div>
                         <div className="text-[11px] text-zinc-400">AI / ML Engineer & Software Dev</div>
                       </div>
                       <div className="flex items-center gap-1 text-[11px] text-sky-400 font-mono font-medium px-2 py-0.5 rounded bg-sky-500/10 border border-sky-500/20">
@@ -138,7 +227,7 @@ export default function Hero() {
                   </div>
                 </div>
 
-                {/* Floating Top Pill (Inspired by Matthew animation style) */}
+                {/* Floating Top Pill */}
                 <motion.div
                   initial={{ y: -10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -154,7 +243,7 @@ export default function Hero() {
 
         </div>
 
-        {/* Stats Grid Ribbon (Minimalist, Crisp & Clean) */}
+        {/* Stats Grid Ribbon */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
@@ -178,4 +267,3 @@ export default function Hero() {
     </section>
   );
 }
-

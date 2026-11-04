@@ -1,14 +1,21 @@
+import { contactConfig } from './contactConfig.js';
+
+export { contactConfig };
+
 export const personalInfo = {
-  name: "Yasara Gayanaka Dissanayake",
-  shortName: "Yasara",
-  headline: "Computer Science Graduate • AI & ML Engineer • Full-Stack Developer",
-  location: "Galle / Colombo, Sri Lanka",
-  email: "yasaradissanayake2002@gmail.com",
-  phone: "+94 763 776 393",
-  github: "https://github.com",
-  linkedin: "https://linkedin.com",
+  name: contactConfig.name,
+  shortName: contactConfig.shortName,
+  headline: contactConfig.title,
+  location: contactConfig.location.display,
+  email: contactConfig.email.address,
+  phone: contactConfig.phone.display,
+  github: contactConfig.socials.github.url,
+  linkedin: contactConfig.socials.linkedin.url,
+  whatsapp: contactConfig.socials.whatsapp.url,
+  resume: contactConfig.resume,
+  contacts: contactConfig,
   photo: "/yasara.jpg",
-  status: "Available for Graduate & Full-Time Roles",
+  status: contactConfig.status,
   summary:
     "First Class Honours Computer Science graduate from the University of Westminster through Informatics Institute of Technology (IIT), with over one year of industry experience across Machine Learning, Software Engineering, and IT. Skilled in Python, PyTorch, HuggingFace Transformers, Power BI, and end-to-end ML development from data processing to deployment. Experienced in building ML solutions, full-stack applications, and client-facing systems. Seeking a graduate role in Data Science, Machine Learning Engineering, or Data Analytics.",
   metrics: [
@@ -95,7 +102,7 @@ export const projectsData = [
       "Built an end-to-end training pipeline with model versioning and automated retraining on high-confidence predictions (>80%), processing 500-comment batches in under two minutes.",
       "Engineered an unsupervised cross-lingual approach enabling zero-shot transfer across Sinhala, English, and Singlish without labelled localized training data."
     ],
-    githubUrl: "https://github.com",
+    githubUrl: contactConfig.socials.github.url,
     metricsList: [
       { name: "Sentiment Weighted F1", score: "83.72%" },
       { name: "Emotion Macro-F1", score: "58.67%" },
@@ -130,7 +137,7 @@ export const projectsData = [
       "Exposed low-latency predictions through a FastAPI backend connected to a sleek React.js and Vite frontend.",
       "Achieved 89.53% accuracy and 89.42% Macro-F1 with the Fusion MLP, while the RoBERTa content model achieved 85.77% accuracy and 85.64% Macro-F1 on the held-out Fakeddit benchmark."
     ],
-    githubUrl: "https://github.com",
+    githubUrl: contactConfig.socials.github.url,
     metricsList: [
       { name: "Multimodal Fusion Accuracy", score: "89.53%" },
       { name: "Macro-F1 Score", score: "89.42%" },
@@ -162,7 +169,7 @@ export const projectsData = [
       "Built an end-to-end RAG pipeline using LangChain, BGE-M3 dense embeddings, Chroma vector database, and Google Gemini with grounded generation and source citations.",
       "Implemented SHA-256 document-change detection, manifest-based index tracking, staging validation, rollback support, and automated testing across the document processing pipeline."
     ],
-    githubUrl: "https://github.com",
+    githubUrl: contactConfig.socials.github.url,
     metricsList: [
       { name: "Index Integrity", score: "SHA-256 Change Detection" },
       { name: "Vector Engine", score: "BGE-M3 + Chroma" },
@@ -191,7 +198,7 @@ export const projectsData = [
       "Developed a BERT + CNN hybrid deep learning model for detecting implicit and obfuscated hate speech, combining contextual embeddings with CNN-based local feature extraction.",
       "Achieved 0.90 Macro-F1 and 0.98 Weighted F1, rigorously evaluated using precision, recall, F1-score, and confusion-matrix analysis."
     ],
-    githubUrl: "https://github.com",
+    githubUrl: contactConfig.socials.github.url,
     metricsList: [
       { name: "Weighted F1 Score", score: "0.98" },
       { name: "Macro-F1 Score", score: "0.90" },

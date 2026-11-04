@@ -1,9 +1,16 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Github, CheckCircle2, Cpu, BarChart2, Layers } from 'lucide-react';
+import { X, ExternalLink, Github, CheckCircle2, Cpu, BarChart2, Layers, Mail, ArrowUpRight } from 'lucide-react';
+import { contactConfig, createMailtoLink } from '../data/contactConfig';
 
 export default function ProjectModal({ project, onClose }) {
   if (!project) return null;
+
+  const projectGithub = project.githubUrl || contactConfig.socials.github.url;
+  const projectInquiryMail = createMailtoLink(
+    `Project Inquiry: ${project.title}`,
+    `Hi Yasara,\n\nI was reviewing your ${project.title} project on your portfolio and would like to learn more about its architecture and results.`
+  );
 
   return (
     <AnimatePresence>
@@ -14,7 +21,7 @@ export default function ProjectModal({ project, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/80 backdrop-blur-md"
         />
 
         {/* Modal Window */}
@@ -28,6 +35,7 @@ export default function ProjectModal({ project, onClose }) {
           {/* Close Button */}
           <button
             onClick={onClose}
+            aria-label="Close modal"
             className="absolute top-5 right-5 p-2 rounded-full bg-zinc-800/80 text-zinc-400 hover:text-white hover:bg-zinc-700 transition-colors"
           >
             <X className="w-5 h-5" />
@@ -43,7 +51,7 @@ export default function ProjectModal({ project, onClose }) {
             <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2">
               {project.title}
             </h3>
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-zinc-400 leading-relaxed">
               {project.subtitle}
             </p>
           </div>
@@ -108,14 +116,34 @@ export default function ProjectModal({ project, onClose }) {
             </div>
           </div>
 
-          {/* Footer Action */}
-          <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
-            <span className="text-xs text-zinc-500 font-mono">Yasara Gayanaka Portfolio</span>
+          {/* Project Actions & Footer */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-5 border-t border-zinc-800">
+            <div className="flex items-center gap-2">
+              <a
+                href={projectGithub}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-medium text-white hover:bg-zinc-800 hover:border-zinc-700 transition-colors"
+              >
+                <Github className="w-4 h-4" />
+                <span>View on GitHub</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
+              </a>
+
+              <a
+                href={projectInquiryMail}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-500/10 border border-sky-500/20 text-xs font-medium text-sky-400 hover:bg-sky-500/20 transition-colors"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Inquire About Project</span>
+              </a>
+            </div>
+
             <button
               onClick={onClose}
               className="px-4 py-2 rounded-xl bg-white text-zinc-950 font-semibold text-xs hover:bg-zinc-200 transition-colors"
             >
-              Close Details
+              Close
             </button>
           </div>
         </motion.div>
@@ -123,4 +151,3 @@ export default function ProjectModal({ project, onClose }) {
     </AnimatePresence>
   );
 }
-

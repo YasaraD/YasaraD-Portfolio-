@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '../data/portfolioData';
-import { Brain, Code2, Server, GraduationCap, Sparkles, CheckCircle } from 'lucide-react';
+import { contactConfig } from '../data/contactConfig';
+import { Brain, Code2, Server, GraduationCap, Sparkles, CheckCircle, ArrowUpRight } from 'lucide-react';
 
 export default function About() {
   const pillars = [
@@ -67,6 +68,16 @@ export default function About() {
                 <CheckCircle className="w-3.5 h-3.5 text-sky-400" />
                 <span>CIMA Cert BA Candidate</span>
               </div>
+            </div>
+
+            <div className="pt-2 flex items-center gap-3">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors"
+              >
+                <span>Connect regarding Graduate & Full-Time Roles</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
             </div>
           </div>
 
