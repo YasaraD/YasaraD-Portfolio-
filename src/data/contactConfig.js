@@ -43,8 +43,6 @@ export const contactConfig = {
   },
 
   // --- Resume / CV ---
-  // To link your PDF: place your file in the /public folder (e.g. /public/Yasara_Dissanayake_CV.pdf)
-  // or put a Google Drive / cloud link in url.
   resume: {
     url: "/Yasara_Dissanayake_CV.pdf",
     label: "Download CV",
@@ -53,7 +51,6 @@ export const contactConfig = {
   },
 
   // --- Social Profiles & URLs ---
-  // Simply edit the 'url' property below for any profile!
   socials: {
     github: {
       id: "github",
@@ -121,4 +118,3 @@ export function getPrimarySocials() {
 }
 
 export default contactConfig;
-
